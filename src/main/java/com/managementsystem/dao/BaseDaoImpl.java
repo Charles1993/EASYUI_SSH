@@ -12,6 +12,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
+
+import com.managementsystem.common.ConstantUtil;
+import com.managementsystem.query.QueryParms;
+import com.managementsystem.query.SingleQueryParam;
 @Repository
 public  class BaseDaoImpl<PK extends Serializable, T> implements BaseDao<PK, T> {
 	private  Class<T> persistentClass;
@@ -37,6 +42,9 @@ public  class BaseDaoImpl<PK extends Serializable, T> implements BaseDao<PK, T> 
 	protected Session getSession(){
 		return sessionFactory.getCurrentSession();
 	}
+	protected Criteria createEntityCriteria(){
+		return getSession().createCriteria(persistentClass);
+	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public T getById(PK id) {
@@ -56,9 +64,7 @@ public  class BaseDaoImpl<PK extends Serializable, T> implements BaseDao<PK, T> 
 		return (List<T>)criteria.list();
 	}
 	
-	protected Criteria createEntityCriteria(){
-		return getSession().createCriteria(persistentClass);
-	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> getByFiled(String propertyName, Object value) {
@@ -66,5 +72,32 @@ public  class BaseDaoImpl<PK extends Serializable, T> implements BaseDao<PK, T> 
 		criteria.add(Restrictions.eq(propertyName, value));
 		return (List<T>)criteria.list();
 	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<T> getByFileds(QueryParms queryParams) {
+		Criteria criteria=createEntityCriteria();
+		handlerQueryParams(criteria,queryParams);
+		return (List<T>)criteria.list();
+	}
+	private Criteria handlerQueryParams(Criteria criteria,QueryParms queryParams) {
+		if(queryParams != null && StringUtils.isEmpty(queryParams.getSingleQueryParams())) {
+			for(SingleQueryParam singleQueryparam:queryParams.getSingleQueryParams()) {
+				if(ConstantUtil.getGt().equals(singleQueryparam.getOpCode())) {
+					criteria.add(Restrictions.gt(singleQueryparam.getPropertity(), singleQueryparam.getPropertityValue()));
+				}else if(ConstantUtil.getGe().equals(singleQueryparam.getOpCode())) {
+					criteria.add(Restrictions.ge(singleQueryparam.getPropertity(), singleQueryparam.getPropertityValue()));
+				}else if(ConstantUtil.getLt().equals(singleQueryparam.getOpCode())) {
+					criteria.add(Restrictions.lt(singleQueryparam.getPropertity(), singleQueryparam.getPropertityValue()));
+				}else if(ConstantUtil.getLe().equals(singleQueryparam.getOpCode())) {
+					criteria.add(Restrictions.le(singleQueryparam.getPropertity(), singleQueryparam.getPropertityValue()));
+				}else if(ConstantUtil.getIn().equals(singleQueryparam.getOpCode())) {
+					//TODO 处理 in操作数据库的情况
+//					criteria.add(Restrictions.in(singleQueryparam.getPropertity(), singleQueryparam.getPropertityValue()));
+				}
+			}
+		}
+		return criteria;
+	}
 	
+
 }

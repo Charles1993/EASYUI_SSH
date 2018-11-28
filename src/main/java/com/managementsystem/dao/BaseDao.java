@@ -3,6 +3,8 @@ package com.managementsystem.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import com.managementsystem.query.QueryParms;
+
 public interface BaseDao<PK extends Serializable, T> {
 	/**
 	 * 根据ID获取对象(对象不存在则返回null)
@@ -28,11 +30,12 @@ public interface BaseDao<PK extends Serializable, T> {
 	 * @return
 	 */
 	List<T> getByFiled(String filed,Object value);
+
 	/**
-	 *	
-	 * @param fileds
-	 * @param value
+	 * 多个参数配合查询
+	 * @param queryParams
+	 * @param entityClass
 	 * @return
 	 */
-//	List<T> getByFileds(T className,);
+	List<T> getByFileds(QueryParms queryParams);
 }

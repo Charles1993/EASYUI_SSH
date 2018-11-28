@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"    
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    
+          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee    
+          http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd"    
+          version="3.1">    
+  <display-name>Archetype Created Web Application</display-name>
+
+  <welcome-file-list>
+  	<welcome-file>/views/jsp/login.html</welcome-file>
+  </welcome-file-list>
+  
+   <!-- Load by Spring ContextLoaderListener -->
+   <context-param>
+       <param-name>contextConfigLocation</param-name>
+       <param-value>classpath:applicationContext.xml</param-value>
+   </context-param>
+ 
+    
+    <!-- Spring ContextLoaderListener -->
+   <listener>
+       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+   </listener>
+    <!-- 请求都交给DispatcherServlet处理 -->
+    <servlet>
+        <servlet-name>springmvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring-mvc.xml</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>springmvc</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    
+      <!-- 增加中文乱码过滤器 -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    
+    <filter>
+		<filter-name>SpringOpenSessionInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	  	<filter-name>SpringOpenSessionInViewFilter</filter-name>
+	 		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+    <!-- 清除jsp空格 -->
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <trim-directive-whitespaces>true</trim-directive-whitespaces>
+        </jsp-property-group>
+    </jsp-config>  
+    
+</web-app>

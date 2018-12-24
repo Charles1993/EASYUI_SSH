@@ -3,6 +3,8 @@ package com.managementsystem.service;
 import java.io.Serializable;
 import java.util.List;
 
+import com.managementsystem.query.QueryParms;
+
 public interface BaseService<PK extends Serializable, T>{
 	/**
 	 * 根据ID获取对象(对象不存在则返回null)
@@ -27,4 +29,26 @@ public interface BaseService<PK extends Serializable, T>{
 	 * @param value
 	 * @return
 	 */
+	/**
+	 * 根据单个字段,字段值获取对应的对象(适用于 equeal 的情况)
+	 * @param filed
+	 * @param value
+	 * @return
+	 */
+	List<T> getByFiled(String filed,Object value);
+
+	/**
+	 * 多个参数配合查询
+	 * @param queryParams
+	 * @param entityClass
+	 * @return
+	 */
+	List<T> getByFileds(QueryParms queryParams);
+	
+	/**
+	 * insert 保存一个对象
+	 * @param entity
+	 * @return
+	 */
+	int save(T entity); 
 }

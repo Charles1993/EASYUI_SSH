@@ -6,18 +6,23 @@
 	west = function(){
 		debugger;
 		var west_this=this;
-		var navList=[{title:'部门管理',content:'',iconCls:'icon-folder',selected:'false'},
+		var navList=[
 					{title:'基础配置',content:'',iconCls:'icon-folder',selected:'false'},
+					{title:'部门管理',content:'',iconCls:'icon-folder',selected:'false'},
 				    {title:'订单管理',content:'',iconCls:'icon-folder',selected:'false'}];
 		west_this.init=function(){
 			//必须配置这个才能显示
 			$("#west_nav").accordion({animate:true});
 			debugger;
+			var defalutUrl= 'views/jsp/config.jsp';
 			$.each(navList, function(index, row) {
 				debugger;
-				if ('部门管理'==row.title) {
-					var tab={title:'端口页面',content:'welecome to the port!',closable:true,tools:[{iconCls:'icon-mini-refresh',handler:function(){alert('refresh');}}]};
-					row.content="<ul><li><a href='#''  onclick='centerObject.addTabs("+JSON.stringify(tab)+")'>端口</a></li></ul>";
+				if ('基础配置'==row.title) {
+					var tab={title:'阿里云服务器配置',content:'<iframe src="'
+						+ defalutUrl
+						+ '" frameborder="0" style="border:0;width:100%;height:100%;"></iframe>',
+							closable:true,tools:[{iconCls:'icon-mini-refresh',handler:function(){alert('refresh');}}]};
+					row.content="<ul><li><a href='#''  onclick='centerObject.addTabs("+JSON.stringify(tab)+")'>阿里云服务器配置</a></li></ul>";
 				}
 				$('#west_nav').accordion('add', {
 					title: row.title,
@@ -43,23 +48,5 @@
 
 
 <div id="west_nav" class="easyui-accordion" >
-	<!--显示导航栏内容 
-
-	-->
-	
-
-
-   <!--
-   <div title="部门管理" data-options="iconCls:'icon-folder'" style="overflow:auto;padding:30px;">
-   	
-   </div>
-   <div title="基础配置" data-options="iconCls:'icon-folder',selected:true" style="padding:30px;">
-
-   	
-   </div>  
-   <div title="标题" data-options="iconCls:'icon-folder',selected:true" style="padding:30px;">
-   	
-   </div>
-   -->
- 
+	<!--显示导航栏内容 -->
 </div>

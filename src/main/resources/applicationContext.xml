@@ -41,6 +41,8 @@
 		<tx:attributes>
 	
 			<tx:method name="get*" read-only="true" />
+			<tx:method name="save*" read-only="true" />
+			
 
 		</tx:attributes>
 	</tx:advice>

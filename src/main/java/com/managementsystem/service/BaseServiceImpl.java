@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.managementsystem.dao.BaseDao;
+import com.managementsystem.query.QueryParms;
 
 
 /**
@@ -47,6 +48,24 @@ public class BaseServiceImpl<PK extends Serializable, T> implements BaseService<
 	@Override
 	public List<T> getAll() {
 		return baseDao.getAll();
+	}
+
+	@Override
+	public List<T> getByFiled(String filed, Object value) {
+		// TODO Auto-generated method stub
+		return baseDao.getByFiled(filed, value);
+	}
+
+	@Override
+	public List<T> getByFileds(QueryParms queryParams) {
+		// TODO Auto-generated method stub
+		return baseDao.getByFileds(queryParams);
+	}
+
+	@Override
+	public int save(T entity) {
+		// TODO Auto-generated method stub
+		return baseDao.save(entity);
 	}
 
 }

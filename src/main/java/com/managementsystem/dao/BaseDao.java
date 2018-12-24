@@ -38,4 +38,11 @@ public interface BaseDao<PK extends Serializable, T> {
 	 * @return
 	 */
 	List<T> getByFileds(QueryParms queryParams);
+	
+	/**
+	 * insert 保存一个对象
+	 * @param entity
+	 * @return
+	 */
+	int save(T entity); 
 }

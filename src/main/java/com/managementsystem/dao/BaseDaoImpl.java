@@ -8,8 +8,10 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -79,6 +81,21 @@ public  class BaseDaoImpl<PK extends Serializable, T> implements BaseDao<PK, T> 
 		handlerQueryParams(criteria,queryParams);
 		return (List<T>)criteria.list();
 	}
+
+	@Override
+	public int save(T entity) {
+		int num=1;
+        try {
+//        	Transaction tx=getSession().getTransaction();
+            getSession().save(entity);
+//            tx.commit();
+        } catch (HibernateException e) {
+            num=0;
+            e.printStackTrace();
+        }
+        return num;	   
+	}
+	
 	private Criteria handlerQueryParams(Criteria criteria,QueryParms queryParams) {
 		if(queryParams != null && StringUtils.isEmpty(queryParams.getSingleQueryParams())) {
 			for(SingleQueryParam singleQueryparam:queryParams.getSingleQueryParams()) {

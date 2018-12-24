@@ -101,6 +101,12 @@
 		  <version>${taglibVersion}</version>
 		</dependency>
 	
+	    <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.2</version>
+            <scope>provided</scope>
+        </dependency>
 		<!-- DataBase数据库连接 mysql包-->
 		<dependency>
 		  <groupId>mysql</groupId>

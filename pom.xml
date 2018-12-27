@@ -172,6 +172,24 @@
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>5.1.25</version>
 		</dependency>
+				<!-- AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.6.11</version>
+		</dependency>
+ 
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.11</version>
+		</dependency>
+ 
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.1</version>
+		</dependency>
 
 	</dependencies>
 	<build>
@@ -200,6 +218,13 @@
 							<port>10086</port>
 						</connector>
 					</connectors>
+					<systemProperties>  
+            			<systemProperty>  
+            				<name>org.mortbay.util.URI.charset</name>  
+            				<value>UTF-8</value>  
+        				</systemProperty>  
+     				</systemProperties> 
+     				<encoding>utf8</encoding>
 					<webApp>
 						<contextPath>/ms/</contextPath>
 					</webApp>

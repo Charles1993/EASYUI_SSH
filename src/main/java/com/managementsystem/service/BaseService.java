@@ -51,4 +51,10 @@ public interface BaseService<PK extends Serializable, T>{
 	 * @return
 	 */
 	int save(T entity); 
+	/**
+	 * delete 删除一个对象
+	 * @param entity
+	 */
+	int delete(T entity);
+
 }

@@ -3,11 +3,7 @@ package com.managementsystem.service;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.managementsystem.dao.BaseDao;
 import com.managementsystem.query.QueryParms;
@@ -66,6 +62,11 @@ public class BaseServiceImpl<PK extends Serializable, T> implements BaseService<
 	public int save(T entity) {
 		// TODO Auto-generated method stub
 		return baseDao.save(entity);
+	}
+
+	@Override
+	public int delete(T entity) {
+		return baseDao.delete(entity);
 	}
 
 }

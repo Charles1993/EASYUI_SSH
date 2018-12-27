@@ -5,8 +5,14 @@
 
 <link href="easyui/themes/bootstrap/easyui.css" rel="stylesheet" type="text/css" />
 <link href="easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+
 <script src="easyui/jquery.min.js" type="text/javascript"></script>
 <script src="easyui/jquery.easyui.min.js" type="text/javascript"></script>
+<script src="easyui/jquery.portal.js" type="text/javascript"></script>
+<script src="css/echarts-all.js" type="text/javascript"></script>
+
+
 </head>
 <body class="easyui-layout" >
 

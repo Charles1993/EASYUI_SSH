@@ -14,14 +14,19 @@
 			//必须配置这个才能显示
 			$("#west_nav").accordion({animate:true});
 			debugger;
-			var defalutUrl= 'views/jsp/config.jsp';
+			var defalutUrl= 'views/jsp/config/config.jsp';
 			$.each(navList, function(index, row) {
 				debugger;
 				if ('基础配置'==row.title) {
 					var tab={title:'阿里云服务器配置',content:'<iframe src="'
 						+ defalutUrl
 						+ '" frameborder="0" style="border:0;width:100%;height:100%;"></iframe>',
-							closable:true,tools:[{iconCls:'icon-mini-refresh',handler:function(){alert('refresh');}}]};
+							closable:true,tools:[{
+								iconCls:'icon-mini-refresh',handler:function(){
+								alert('refresh');
+								}
+							}]
+						};
 					row.content="<ul><li><a href='#''  onclick='centerObject.addTabs("+JSON.stringify(tab)+")'>阿里云服务器配置</a></li></ul>";
 				}
 				$('#west_nav').accordion('add', {

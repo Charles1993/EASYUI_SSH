@@ -11,7 +11,6 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -30,7 +29,8 @@ public  class BaseDaoImpl<PK extends Serializable, T> implements BaseDao<PK, T> 
 	public BaseDaoImpl(){
 		
         this.persistentClass = null;  
-        Class c = getClass();  
+        @SuppressWarnings("rawtypes")
+		Class c = getClass();  
         Type t = c.getGenericSuperclass();  
         if (t instanceof ParameterizedType) {  
             Type[] p = ((ParameterizedType) t).getActualTypeArguments();  
@@ -115,6 +115,17 @@ public  class BaseDaoImpl<PK extends Serializable, T> implements BaseDao<PK, T> 
 		}
 		return criteria;
 	}
+	@Override
+	public int delete(T entity) {
+		int num=1;
+        try {
+            getSession().delete(entity);
+        } catch (RuntimeException  e) {
+            num=0;
+            e.printStackTrace();
+        }
+        return num;
+    }
 	
 
 }
